@@ -158,7 +158,7 @@ const [firstMark, secondMark] = firstStudent.marks;
 console.log(firstMark);
 console.log(secondMark);
 
-// Spread operator - copy and update object
+// Spread operator copy and update object
 const updatedStudent: Student = {
     ...firstStudent,
     department: "Artificial Intelligence",

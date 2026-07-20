@@ -3,6 +3,9 @@
 const company: string = "ABC Tech";
 let age: number = 22;
 
+const companyName: string = "Qbatch";
+const num:number = 19;
+
 // Primitive Types
 let userName: string = "Azfar";
 let isStudent: boolean = true;
@@ -29,6 +32,9 @@ type Employee = {
         country: string;
     };
 };
+
+
+
 
 const employee: Employee = {
     id: 1,
@@ -90,7 +96,7 @@ for (const key in employee) {
 
 // Function Type
 function greet(name: string): string {
-    return `Hello ${name}`;
+    return "Hello ${name}";
 }
 
 // Optional Parameter

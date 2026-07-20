@@ -2,6 +2,8 @@
 // const vs let
 const company = "ABC Tech";
 let age = 22;
+const companyName = "Qbatch";
+const num = 19;
 // Primitive Types
 let userName = "Azfar";
 let isStudent = true;
@@ -57,7 +59,7 @@ for (const key in employee) {
 }
 // Function Type
 function greet(name) {
-    return `Hello ${name}`;
+    return "Hello ${name}";
 }
 // Optional Parameter
 function introduce(name, age) {
