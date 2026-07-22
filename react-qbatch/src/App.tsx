@@ -3,6 +3,8 @@ import {
   useEffect, 
   useMemo } from "react";
 
+import orderBy from "lodash/orderBy";
+
 import type { Student } from "./types/Student";
 
 import Header from "./components/Header";
@@ -11,13 +13,9 @@ import StudentList from "./components/StudentList";
 import Counter from "./components/Counter";
 
 function App() {
-  // Students State
   const [students, setStudents] = useState<Student[]>([]);
-
-  // Search State
   const [search, setSearch] = useState("");
 
-  // Simulate API call
   useEffect(() => {
     const studentData: Student[] = [
       {
@@ -26,6 +24,7 @@ function App() {
         age: 20,
         course: "React",
         active: true,
+        joinedAt: "2025-10-12",
       },
       {
         id: 2,
@@ -33,6 +32,7 @@ function App() {
         age: 22,
         course: "Node.js",
         active: false,
+        joinedAt: "2025-11-08",
       },
       {
         id: 3,
@@ -40,6 +40,7 @@ function App() {
         age: 21,
         course: "Python",
         active: true,
+        joinedAt: "2025-12-18",
       },
       {
         id: 4,
@@ -47,6 +48,7 @@ function App() {
         age: 23,
         course: "Java",
         active: true,
+        joinedAt: "2026-01-20",
       },
       {
         id: 5,
@@ -54,6 +56,7 @@ function App() {
         age: 24,
         course: "C++",
         active: false,
+        joinedAt: "2026-02-10",
       },
       {
         id: 6,
@@ -61,40 +64,38 @@ function App() {
         age: 20,
         course: "MERN",
         active: true,
+        joinedAt: "2026-03-15",
       },
     ];
 
     setStudents(studentData);
   }, []);
 
-  // Filter students
   const filteredStudents = useMemo(() => {
-    return students.filter((student) =>
-      student.name.toLowerCase().includes(search.toLowerCase())
+    const filtered = students.filter((student) =>
+      student.name.toLowerCase().includes(search.toLowerCase()),
     );
+
+    return orderBy(filtered, ["name"], ["asc"]);
   }, [students, search]);
 
   return (
-    <div className="container">
-      <Header />
+    <div className="min-h-screen bg-slate-100">
+      <div className="mx-auto max-w-6xl p-8">
+        <Header />
 
-      <SearchBar
-        search={search}
-        setSearch={setSearch}
-      />
+        <SearchBar search={search} setSearch={setSearch} />
 
-      <StudentList students={filteredStudents} />
+        <StudentList students={filteredStudents} />
 
-      <h3
-        style={{
-          marginTop: "20px",
-          textAlign: "center",
-        }}
-      >
-        Showing {filteredStudents.length} student(s)
-      </h3>
+        <div className="mt-8 text-center text-lg font-semibold">
+          Showing {filteredStudents.length} student(s)
+        </div>
 
-      <Counter />
+        <div className="mt-8">
+          <Counter />
+        </div>
+      </div>
     </div>
   );
 }

@@ -1,25 +1,30 @@
 import { 
-  useState,
+  useState, 
   useMemo, 
   useRef, 
-  useCallback 
-} from "react";
+  useCallback } from "react";
+
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "../../shad-ui/components/ui/card";
+
+import { Button } from "../../shad-ui/components/ui/button";
+import { Separator } from "../../shad-ui/components/ui/separator";
 
 function Counter() {
   const [count, setCount] = useState(0);
 
-  // Count how many times the component renders
   const renderCount = useRef(1);
-
   renderCount.current++;
 
-  // Memoized expensive calculation
   const square = useMemo(() => {
     console.log("Calculating square...");
     return count * count;
   }, [count]);
 
-  // Memoized handlers
   const increment = useCallback(() => {
     setCount((prev) => prev + 1);
   }, []);
@@ -33,25 +38,51 @@ function Counter() {
   }, []);
 
   return (
-    <div className="counter">
-      <h2>React Hooks Counter</h2>
+    <Card className="mt-10 shadow-lg">
+      <CardHeader>
+        <CardTitle className="text-center text-2xl">
+          ⚛️ React Hooks Counter
+        </CardTitle>
+      </CardHeader>
 
-      <h1>{count}</h1>
+      <CardContent>
+        <div className="mb-6 text-center text-6xl font-bold text-primary">
+          {count}
+        </div>
 
-      <div className="buttons">
-        <button onClick={decrement}>-</button>
-        <button onClick={reset}>Reset</button>
-        <button onClick={increment}>+</button>
-      </div>
+        <div className="mb-8 flex justify-center gap-4">
+          <Button variant="destructive" onClick={decrement}>
+            −
+          </Button>
 
-      <p>
-        <strong>Square:</strong> {square}
-      </p>
+          <Button variant="secondary" onClick={reset}>
+            Reset
+          </Button>
 
-      <p>
-        <strong>Renders:</strong> {renderCount.current}
-      </p>
-    </div>
+          <Button onClick={increment}>+</Button>
+        </div>
+
+        <Separator className="mb-6" />
+
+        <div className="grid gap-4 md:grid-cols-2">
+          <Card>
+            <CardContent className="py-6 text-center">
+              <p className="text-sm text-muted-foreground">Square</p>
+
+              <p className="mt-2 text-3xl font-bold text-primary">{square}</p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardContent className="py-6 text-center">
+              <p className="text-sm text-muted-foreground">Render Count</p>
+
+              <p className="mt-2 text-3xl font-bold">{renderCount.current}</p>
+            </CardContent>
+          </Card>
+        </div>
+      </CardContent>
+    </Card>
   );
 }
 
