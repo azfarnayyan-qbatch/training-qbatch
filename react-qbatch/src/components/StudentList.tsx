@@ -1,6 +1,11 @@
 import StudentCard from "./StudentCard";
+import type { Student } from "../types/Student";
 
-function StudentList({ students }) {
+interface StudentListProps {
+  students: Student[];
+}
+
+function StudentList({ students }: StudentListProps) {
   if (students.length === 0) {
     return <h2>No students found.</h2>;
   }

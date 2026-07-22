@@ -1,4 +1,9 @@
-import { useState, useEffect, useMemo, useCallback } from "react";
+import { 
+  useState, 
+  useEffect, 
+  useMemo } from "react";
+
+import type { Student } from "./types/Student";
 
 import Header from "./components/Header";
 import SearchBar from "./components/SearchBar";
@@ -6,16 +11,15 @@ import StudentList from "./components/StudentList";
 import Counter from "./components/Counter";
 
 function App() {
-  
   // Students State
-  const [students, setStudents] = useState([]);
+  const [students, setStudents] = useState<Student[]>([]);
 
   // Search State
   const [search, setSearch] = useState("");
 
   // Simulate API call
   useEffect(() => {
-    const studentData = [
+    const studentData: Student[] = [
       {
         id: 1,
         name: "Ali",
@@ -63,17 +67,12 @@ function App() {
     setStudents(studentData);
   }, []);
 
-  // useMemo 
+  // Filter students
   const filteredStudents = useMemo(() => {
     return students.filter((student) =>
       student.name.toLowerCase().includes(search.toLowerCase())
     );
   }, [students, search]);
-
-  // useCallback
-  const handleSearch = useCallback((value) => {
-    setSearch(value);
-  }, []);
 
   return (
     <div className="container">
@@ -81,7 +80,7 @@ function App() {
 
       <SearchBar
         search={search}
-        setSearch={handleSearch}
+        setSearch={setSearch}
       />
 
       <StudentList students={filteredStudents} />
@@ -95,7 +94,7 @@ function App() {
         Showing {filteredStudents.length} student(s)
       </h3>
 
-      <Counter/>
+      <Counter />
     </div>
   );
 }
