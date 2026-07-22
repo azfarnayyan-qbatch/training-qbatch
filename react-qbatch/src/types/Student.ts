@@ -4,4 +4,5 @@ export interface Student {
   age: number;
   course: string;
   active: boolean;
+  joinedAt: string;
 }
