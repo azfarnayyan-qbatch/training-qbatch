@@ -1,6 +1,11 @@
 import React from "react";
+import type { Student } from "../types/Student";
 
-function StudentCard({ student }) {
+interface StudentCardProps {
+  student: Student;
+}
+
+function StudentCard({ student }: StudentCardProps) {
   return (
     <div className="card">
       <h2>{student.name}</h2>
@@ -15,7 +20,7 @@ function StudentCard({ student }) {
 
       <p>
         <strong>Status:</strong>{" "}
-        {student.active ? "Active" : " Inactive"}
+        {student.active ? "Active" : "Inactive"}
       </p>
     </div>
   );
